@@ -37,28 +37,28 @@
                             </tr>
                             <tr>
                                 <td>Temperature</td>
-                                <td><span id="device-temp">???</span></td>
-                                <td>°C</td>
+                                <td><span id="device-temp">???</span> °C</td>
+                                <td></td>
                             </tr>
-                            <tr>
+                            <tr id="device-humi-col">
                                 <td>Humidity</td>
-                                <td><span id="device-humi">???</span></td>
-                                <td>%</td>
+                                <td><span id="device-humi">???</span> %</td>
+                                <td id="device-humi-int"></td>
                             </tr>
-                            <tr>
+                            <tr id="device-particulate-col">
                                 <td>Particulates</td>
-                                <td><span id="device-particulate">???</span></td>
-                                <td>ug/m^3</td>
-                            </tr>
+                                <td><span id="device-particulate">???</span> ug/m^3</td>
+                                <td id="device-particulate-int"></td>
+                            </tr id="device-co-col">
                             <tr>
                                 <td>Carbon Monoxide</td>
-                                <td><span id="device-co">???</span></td>
-                                <td>ppm</td>
+                                <td><span id="device-co">???</span> ppm</td>
+                                <td id="device-co-int"></td>
                             </tr>
                             <tr>
                                 <td>Methane</td>
-                                <td><span id="device-h4">???</span></td>
-                                <td>ppm</td>
+                                <td><span id="device-h4">???</span> ppm</td>
+                                <td></td>
                             </tr>
                         </table>
 
@@ -188,6 +188,31 @@
                     document.getElementById("device-particulate").innerHTML = lastReading.particulate
                     document.getElementById("device-co").innerHTML = lastReading.co
                     document.getElementById("device-h4").innerHTML = lastReading.h4
+                    
+                    if(lastReading.particulate < 80){
+                        document.getElementById("device-particulate-col").className = "text-success"
+                        document.getElementById("device-particulate-int").innerHTML = "Good"
+                    }
+                    else if(lastReading.particulate < 230){
+                        document.getElementById("device-particulate-col").className = "text-success"
+                        document.getElementById("device-particulate-int").innerHTML = "Fair"
+                    }
+                    else if(lastReading.particulate < 350){
+                        document.getElementById("device-particulate-col").className = "text-warning"
+                        document.getElementById("device-particulate-int").innerHTML = "Unhealthy"
+                    }
+                    else if(lastReading.particulate < 600){
+                        document.getElementById("device-particulate-col").className = "text-warning"
+                        document.getElementById("device-particulate-int").innerHTML = "Very Unhealthy"
+                    }
+                    else if(lastReading.particulate < 900){
+                        document.getElementById("device-particulate-col").className = "text-danger"
+                        document.getElementById("device-particulate-int").innerHTML = "Acutely Unhealthy"
+                    }
+                    else {
+                        document.getElementById("device-particulate-col").className = "text-danger"
+                        document.getElementById("device-particulate-int").innerHTML = "Emergency"
+                    }
 
                     for(let i=last_timestamp; i<keys.length; i++) {
                         chart.data.labels.push(snapval[keys[i]].timestamp * 1000)
