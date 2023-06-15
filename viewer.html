@@ -213,6 +213,52 @@
                         document.getElementById("device-particulate-col").className = "text-danger"
                         document.getElementById("device-particulate-int").innerHTML = "Emergency"
                     }
+                    
+                    if(lastReading.co < 4.5){
+                        document.getElementById("device-co-col").className = "text-success"
+                        document.getElementById("device-co-int").innerHTML = "Good"
+                    }
+                    else if(lastReading.co < 9.5){
+                        document.getElementById("device-co-col").className = "text-success"
+                        document.getElementById("device-co-int").innerHTML = "Fair"
+                    }
+                    else if(lastReading.co < 12.5){
+                        document.getElementById("device-co-col").className = "text-warning"
+                        document.getElementById("device-co-int").innerHTML = "Unhealthy"
+                    }
+                    else if(lastReading.co < 15.5){
+                        document.getElementById("device-co-col").className = "text-warning"
+                        document.getElementById("device-co-int").innerHTML = "Very Unhealthy"
+                    }
+                    else if(lastReading.co < 30.5){
+                        document.getElementById("device-co-col").className = "text-danger"
+                        document.getElementById("device-co-int").innerHTML = "Acutely Unhealthy"
+                    }
+                    else {
+                        document.getElementById("device-co-col").className = "text-danger"
+                        document.getElementById("device-co-int").innerHTML = "Emergency"
+                    }
+                    
+                    if(lastReading.humi < 25){
+                        document.getElementById("device-humi-col").className = "text-danger"
+                        document.getElementById("device-humi-int").innerHTML = "Poor (low)"
+                    }
+                    else if(lastReading.humi < 30){
+                        document.getElementById("device-humi-col").className = "text-warning"
+                        document.getElementById("device-humi-int").innerHTML = "Fair (low)"
+                    }
+                    else if(lastReading.humi < 60){
+                        document.getElementById("device-humi-col").className = "text-success"
+                        document.getElementById("device-humi-int").innerHTML = "Good"
+                    }
+                    else if(lastReading.humi < 70){
+                        document.getElementById("device-humi-col").className = "text-warning"
+                        document.getElementById("device-humi-int").innerHTML = "Fair (high)"
+                    }
+                    else {
+                        document.getElementById("device-humi-col").className = "text-danger"
+                        document.getElementById("device-humi-int").innerHTML = "Poor (high)"
+                    }
 
                     for(let i=last_timestamp; i<keys.length; i++) {
                         chart.data.labels.push(snapval[keys[i]].timestamp * 1000)
